@@ -1,0 +1,17 @@
+# Go binary
+kubeops
+
+# Build output
+bin/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Coverage
+coverage.out
