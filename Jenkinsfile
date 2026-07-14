@@ -11,13 +11,13 @@ pipeline {
 
         stage('Go Version') {
             steps {
-                sh 'go version'
+                sh '/usr/local/go/bin/go version'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'go build -o kubeops'
+                sh '/usr/local/go/bin/go build -o kubeops'
             }
         }
 
