@@ -28,29 +28,31 @@ pipeline {
         }
 
         stage('Docker Build & Push') {
-    environment {
-        IMAGE_NAME = "nikithatellatakula7685678587/kubeops-cli"
-    }
+            environment {
+                IMAGE_NAME = "nikithatellatakula7685678587/kubeops-cli"
+            }
 
-    steps {
-        withCredentials([usernamePassword(
-            credentialsId: 'dockerhub',
-            usernameVariable: 'DOCKER_USER',
-            passwordVariable: 'DOCKER_PASS'
-        )]) {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
 
-            sh '''
-                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 
-                docker build -t $IMAGE_NAME:latest .
+                        docker build -t $IMAGE_NAME:latest .
 
-                docker push $IMAGE_NAME:latest
+                        docker push $IMAGE_NAME:latest
 
-                docker logout
-            '''
+                        docker logout
+                    '''
+                }
+            }
         }
-    }
-}
+
+    }   // <-- This brace closes the stages block
 
     post {
         success {
